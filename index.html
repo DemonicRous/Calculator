@@ -118,9 +118,12 @@
 
 			<div class="w-5/6">
 				<div class="my-4 mx-6">
-					<input type="text" placeholder="Введите пример" class="input h-auto input-ghost w-full text-right text-4xl px-4 py-6" />
+					<input id="inputAfter" disabled type="text" class="input h-auto py-2 input-ghost w-full text-right" />
 				</div>
-				<div class="my-2 mx-6">
+				<div class="my-4 mx-6">
+					<input id="inputCalc" @keyup="simpleСheckInput()" @keyup.enter="simpleKeyboard('=')" type="text" placeholder="Введите пример" class="input h-auto input-ghost w-full text-right text-4xl px-4 py-6" />
+				</div>
+				<div class="my-2 mx-6 flex justify-between">
 					<div class="flex">
 						<button class="btn btn-square btn-ghost text-xl mr-1" disabled>MC</button>
 						<button class="btn btn-square btn-ghost text-xl mr-1" disabled>MR</button>
@@ -128,53 +131,60 @@
 						<button class="btn btn-square btn-ghost text-xl mr-1">M-</button>
 						<button class="btn btn-square btn-ghost text-xl">MS</button>
 					</div>
+					<div class="flex">
+						<button class="btn btn-square btn-ghost text-xl mr-1">(</button>
+						<button class="btn btn-square btn-ghost text-xl mr-1">)</button>
+					</div>
 				</div>
 				<div class="my-4 mx-6">
 					<div class="w-full grid grid-cols-5 gap-1">
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24">%</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24">CE</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24">C</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" /></svg>
+						<div @click.prevent="simpleKeyboard('%'); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24">%</div>
+						<div @click.prevent="simpleKeyboard('CE'); simpleCalcClearSymbol();"class="btn btn-square btn-ghost text-2xl w-full h-24">CE</div>
+						<div @click.prevent="simpleKeyboard('C'); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24">C</div>
+						<div @click.prevent="simpleKeyboard('Del'); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" /></svg>
 						</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24">/</div>
+						<div @click.prevent="simpleKeyboard('/'); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24">/</div>
 
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24">√</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">1</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">2</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">3</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+						<div @click.prevent="simpleKeyboard('sqrt'); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24">√</div>
+						<div @click.prevent="simpleKeyboard(1); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">1</div>
+						<div @click.prevent="simpleKeyboard(2); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">2</div>
+						<div @click.prevent="simpleKeyboard(3); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">3</div>
+						<div @click.prevent="simpleKeyboard('*'); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
 						</div>
 
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24">Х²</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">4</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">5</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">6</div>
+						<div @click.prevent="simpleKeyboard(); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24">Х²</div>
+						<div @click.prevent="simpleKeyboard(4); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">4</div>
+						<div @click.prevent="simpleKeyboard(5); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">5</div>
+						<div @click.prevent="simpleKeyboard(6); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">6</div>
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" /></svg>
 						</div>
 
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24">X³</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">7</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">8</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">9</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+						<div @click.prevent="simpleKeyboard(7); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">7</div>
+						<div @click.prevent="simpleKeyboard(8); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">8</div>
+						<div @click.prevent="simpleKeyboard(9); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">9</div>
+						<div @click="simpleKeyboard('+'); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
 						</div>
 
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24"><sup>1</sup>&frasl;<sub>x</sub></div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24">±</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">0</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24">,</div>
-						<div class="btn btn-square btn-ghost text-3xl w-full h-24">=</div>
+						<div @click.prevent="simpleKeyboard('±'); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24">±</div>
+						<div @click.prevent="simpleKeyboard(0); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">0</div>
+						<div @click.prevent="simpleKeyboard(','); simpleCalcClearSymbol();" class="btn btn-square btn-ghost text-2xl w-full h-24">,</div>
+						<div @click.prevent="simpleKeyboard('=');" class="btn btn-square btn-ghost text-3xl w-full h-24">=</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="w-1/6">
+			<div class="w-1/6 mr-4">
 				<div class="tabs w-full z-0">
-				  <a class="tab w-1/2 tab-bordered tab-active">Журнал</a> 
-				  <a class="tab w-1/2 tab-bordered">Память</a>
+				  <a @click.prevent="modeMemory=false" class="tab w-1/2 tab-bordered" :class="[modeMemory === false ? 'tab-active' : '']">Журнал</a> 
+				  <a @click.prevent="modeMemory=true" class="tab w-1/2 tab-bordered" :class="[modeMemory === true ? 'tab-active' : '']">Память</a>
 				</div>
-				<div class="my-2">
-					Content
+				<div v-if="modeMemory === false" class="my-2">
+					Content 1
+				</div>
+				<div v-if="modeMemory === true" class="my-2">
+					Content 2
 				</div>
 			</div>
 
