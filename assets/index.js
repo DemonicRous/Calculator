@@ -18,12 +18,12 @@ const { createApp } = Vue;
      },
      simpleСheckInput: function() {
       let input = document.getElementById('inputCalc');
-      input.value.replace('= ', '');
+      input.value = input.value.replace('= ', '');
       input.value = input.value.replace(/[^0-9\.\,\-+/*()%√]/g, '');
      },
      simpleCalcClearSymbol: function() {
       let input = document.getElementById('inputCalc');
-      input.value.replace('= ', '');
+      input.value = input.value.replace('= ', '');
       input.value = input.value.replace(/[^0-9\.\,\-+/*()%√]/g, '');
      },
      simpleKeyboard: function(key) {
@@ -60,23 +60,29 @@ const { createApp } = Vue;
         case 0:
           input.value += key;
           break;
+        case '(':
+          input.value += key;
+          break;
+        case ')':
+          input.value += key;
+          break;
         case '+':
-          if (!isNaN(input.value.slice(-1)) || (input.value == "")) {
+          if (!isNaN(input.value.slice(-1)) || (input.value == "") || (input.value.slice(-1) == '(') || (input.value.slice(-1) == ')')) {
             input.value += key;
           }
           break;
         case '-':
-          if (!isNaN(input.value.slice(-1)) || (input.value == "")) {
+          if (!isNaN(input.value.slice(-1)) || (input.value == "") || (input.value.slice(-1) == '(') || (input.value.slice(-1) == ')')) {
             input.value += key;
           }
           break;
         case '*':
-          if (!isNaN(input.value.slice(-1)) || (input.value == "")) {
+          if (!isNaN(input.value.slice(-1)) || (input.value == "") || (input.value.slice(-1) == '(') || (input.value.slice(-1) == ')')) {
             input.value += key;
           }
           break;
         case '/':
-          if (!isNaN(input.value.slice(-1)) || (input.value == "")) {
+          if (!isNaN(input.value.slice(-1)) || (input.value == "") || (input.value.slice(-1) == '(') || (input.value.slice(-1) == ')')) {
             input.value += key;
           }
           break;
@@ -86,30 +92,32 @@ const { createApp } = Vue;
           }
           break;
         case '=':
+          try {
+            //function isInteger(x) { return typeof x === "number" && isFinite(x) && Math.floor(x) === x; }
+            function isFloat(x) { return !!(x % 1); }
 
-          //function isInteger(x) { return typeof x === "number" && isFinite(x) && Math.floor(x) === x; }
-          function isFloat(x) { return !!(x % 1); }
-
-          if (!isNaN(input.value.slice(-1)) || input.value.slice(-1) === '.' || input.value == "") {
-            
-            if (!(eval(input.value) === undefined)) {
-              if (isFloat(eval(input.value))) {
-                inputAfter.value = input.value;
-                input.value = '= ' + Math.round(eval(input.value) * 100) / 100;
+            if (!isNaN(input.value.slice(-1)) || input.value.slice(-1) === '.' || input.value == "") {
+              input.value = input.value.replace(',', '.');
+              if (!(eval(input.value) === undefined)) {
+                if (isFloat(eval(input.value))) {
+                  inputAfter.value = input.value;
+                  input.value = '= ' + Math.round(eval(input.value) * 100) / 100;
+                } else {
+                  inputAfter.value = input.value;
+                  input.value = '= ' + eval(input.value);
+                }
+                
               } else {
-                inputAfter.value = input.value;
-                input.value = '= ' + eval(input.value);
+                inputAfter.value = 0;
+                input.value = '= ' + 0;
               }
-              
+            
             } else {
-              inputAfter.value = 0;
-              input.value = '= ' + 0;
+              console.log('Error')
             }
-          
-          } else {
+          } catch (e) {
             console.log('Error')
           }
-          
           break;
         default:
           alert( "Нет таких значений" );
