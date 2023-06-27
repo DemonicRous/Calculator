@@ -104,14 +104,11 @@
 			  </div> 
 			  <div class="drawer-side z-50">
 			    <label for="drawer-end" class="drawer-overlay"></label>
-			    <ul class="menu p-4 w-80 h-full bg-base-200 text-base-content">
-			      <!-- Sidebar content here -->
-			      <li><a>Sidebar Item 1</a></li>
-			      <li><a>Sidebar Item 2</a></li>
+			    <ul class="menu menu-vertical p-4 w-80 bg-base-200 text-base-content overflow-y-auto">
+			      <li class="w-full text-lg capitalize" v-for="theme in themes" @click.prevent="setTheme(theme)"><a>{{theme}}</a></li>
 			    </ul>
 			  </div>
 			</div>
-		    
 		  </div>
 		</div>
 
@@ -142,29 +139,29 @@
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24">/</div>
 
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24">√</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-gray-700">1</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-gray-700">2</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-gray-700">3</div>
+						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">1</div>
+						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">2</div>
+						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">3</div>
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
 						</div>
 
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24">Х²</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-gray-700">4</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-gray-700">5</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-gray-700">6</div>
+						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">4</div>
+						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">5</div>
+						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">6</div>
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" /></svg>
 						</div>
 
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24">X³</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-gray-700">7</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-gray-700">8</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-gray-700">9</div>
+						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">7</div>
+						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">8</div>
+						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">9</div>
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
 						</div>
 
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24"><sup>1</sup>&frasl;<sub>x</sub></div>
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24">±</div>
-						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-gray-700">0</div>
+						<div class="btn btn-square btn-ghost text-2xl w-full h-24 bg-base-300">0</div>
 						<div class="btn btn-square btn-ghost text-2xl w-full h-24">,</div>
 						<div class="btn btn-square btn-ghost text-3xl w-full h-24">=</div>
 					</div>
