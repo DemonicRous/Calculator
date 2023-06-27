@@ -30,8 +30,8 @@ const { createApp } = Vue;
       let input = document.getElementById('inputCalc');
       let inputAfter = document.getElementById('inputAfter');
       switch (key) {
-      case 'Del':
-        input.value = input.value.substring(0, input.value.length - 1);
+        case 'Del':
+          input.value = input.value.substring(0, input.value.length - 1);
           //console.log(input.value.substring(0, input.value.length - 1));
           break;
         case 1:
