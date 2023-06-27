@@ -3,14 +3,17 @@ const { createApp } = Vue;
   createApp({
     data() {
       return {
-        activeMode: "Обычный",
+        activeMode: {name: "Обычный", mode: "simple"},
         themes: ["light","dark","cupcake","bumblebee","emerald","corporate","synthwave","retro","cyberpunk","valentine","halloween","garden","forest","aqua","lofi","pastel","fantasy","wireframe","black","luxury","dracula","cmyk","autumn","business","acid","lemonade","night","coffee","winter",],
         activeTheme: "dark",
+        modeTheme: localStorage.getItem('activeTheme'),
       }
     },
     methods: {
      setTheme: function(theme) {
       document.querySelector('html').dataset.theme = theme;
+      localStorage.setItem('activeTheme', theme);
+      this.modeTheme = localStorage.getItem('activeTheme')
      }
     },
     mounted() {

@@ -91,7 +91,7 @@
 			</div>
 		  </div>
 		  <div class="flex-1">
-		    <span class="ml-2 select-none normal-case text-xl">{{activeMode}}</span>
+		    <span class="ml-2 select-none normal-case text-xl">{{activeMode.name}}</span>
 		  </div>
 		  <div class="flex-none">
 		  	<div class="drawer drawer-end">
@@ -105,7 +105,7 @@
 			  <div class="drawer-side z-50">
 			    <label for="drawer-end" class="drawer-overlay"></label>
 			    <ul class="menu menu-vertical p-4 w-80 bg-base-200 text-base-content overflow-y-auto">
-			      <li class="w-full text-lg capitalize" v-for="theme in themes" @click.prevent="setTheme(theme)"><a>{{theme}}</a></li>
+			      <li class="w-full text-lg capitalize" v-for="theme in themes" @click.prevent="setTheme(theme)"><a :class="[modeTheme === theme ? 'active' : '']">{{theme}}</a></li>
 			    </ul>
 			  </div>
 			</div>
